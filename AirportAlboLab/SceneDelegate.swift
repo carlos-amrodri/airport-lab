@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let initialVC = homeRouter.entry
         
         let window = UIWindow(windowScene: windowsScene)
-        window.rootViewController = initialVC
+        window.rootViewController = UINavigationController(rootViewController: initialVC!)
         self.window = window
         window.makeKeyAndVisible()
         

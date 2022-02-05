@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 typealias EntryPoint = HomeViewProtocol & UIViewController
 
@@ -15,7 +16,7 @@ protocol HomeRouterProtocol {
     
     static func createModule() -> HomeRouterProtocol
     
-    func navigateToMapsView()
+    func navigateToMapsView(with viewController : UIViewController)
 }
 
 class HomeRouter : HomeRouterProtocol {
@@ -40,8 +41,9 @@ class HomeRouter : HomeRouterProtocol {
         return router
     }
     
-    func navigateToMapsView(){
-        print("navegare")
+    func navigateToMapsView(with viewController : UIViewController){
+        let contentView = UIHostingController(rootView: ContentMapsView())
+        viewController.navigationController?.pushViewController(contentView, animated: true)
     }
     
 }

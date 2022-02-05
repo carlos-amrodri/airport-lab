@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol HomeViewProtocol {
     var presenter : HomePresenterProtocol? {get set}
@@ -27,6 +28,10 @@ class HomeView: UIViewController, HomeViewProtocol {
         addSearchButton()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         presenter?.getSliderValue()
     }
@@ -36,7 +41,7 @@ class HomeView: UIViewController, HomeViewProtocol {
     var presenter : HomePresenterProtocol?
     
     @objc func tapSearchButton(){
-        presenter?.navigateToMapsView()
+        presenter?.navigateToMapsView(with: self)
     }
     
     func setRadiusValue(with value: Float){

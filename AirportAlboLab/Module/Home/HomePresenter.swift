@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol HomePresenterProtocol {
     var router : HomeRouterProtocol? {get set}
@@ -14,7 +15,7 @@ protocol HomePresenterProtocol {
     
     func getSliderValue()
     func changeRadius(with value : Float)
-    func navigateToMapsView()
+    func navigateToMapsView(with viewController : UIViewController)
     
     func didLoadInitialSearchRadius( radius : SearchRadius)
 }
@@ -44,8 +45,8 @@ class HomePresenter: HomePresenterProtocol {
         view?.setRadiusValue(with: radius.floatRadius)
     }
     
-    func navigateToMapsView(){
-        router?.navigateToMapsView()
+    func navigateToMapsView(with viewController : UIViewController){
+        router?.navigateToMapsView(with: viewController)
     }
     
 }
