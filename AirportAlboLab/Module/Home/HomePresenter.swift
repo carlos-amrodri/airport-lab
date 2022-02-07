@@ -21,7 +21,7 @@ protocol HomePresenterProtocol {
 }
 
 class HomePresenter: HomePresenterProtocol {
-    
+
     var router: HomeRouterProtocol?
     var interactor: HomeInteractorProtocol?
     var view: HomeViewProtocol?
@@ -46,7 +46,7 @@ class HomePresenter: HomePresenterProtocol {
     }
     
     func navigateToMapsView(with viewController : UIViewController){
-        router?.navigateToMapsView(with: viewController)
+        router?.navigateToMapsView(with: viewController, radiusValue : currentSearchRadius.floatRadius)
     }
     
 }

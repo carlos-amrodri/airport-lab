@@ -9,13 +9,25 @@ import Foundation
 
 struct Airports : Codable {
      
-    var items : [airpot]
+    var items : [Airport]
     
 }
 
-struct airpot : Codable {
+struct Airport : Codable {
     var name : String
     var icao : String
     var iata : String
     var shortName : String
+    var location : Location
+}
+
+
+struct Location : Codable {
+    var lat : Double
+    var lon : Double
+}
+
+struct LocationAndRadius {
+    var location : Location
+    var radius : Int
 }

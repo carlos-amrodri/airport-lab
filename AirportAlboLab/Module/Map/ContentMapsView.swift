@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ContentMapsView: View {
+    
+    @ObservedObject var presenter : MapPresenter
+    
     var body: some View {
         TabView{
-            MapsView().tabItem {
+            MapView(presenter: self.presenter)
+                .tabItem {
                 Image(systemName: "map.fill")
             }
             AirportsListView().tabItem{
@@ -20,8 +24,4 @@ struct ContentMapsView: View {
     }
 }
 
-struct ContentMapsView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentMapsView()
-    }
-}
+

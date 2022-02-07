@@ -11,8 +11,6 @@ import SwiftUI
 protocol HomeViewProtocol {
     var presenter : HomePresenterProtocol? {get set}
     
-    func tapSearchButton()
-    
     func setRadiusValue(with value: Float)
 
 }
@@ -40,10 +38,6 @@ class HomeView: UIViewController, HomeViewProtocol {
     
     var presenter : HomePresenterProtocol?
     
-    @objc func tapSearchButton(){
-        presenter?.navigateToMapsView(with: self)
-    }
-    
     func setRadiusValue(with value: Float){
         self.slider.setValue(value, animated: true)
     }
@@ -60,7 +54,9 @@ class HomeView: UIViewController, HomeViewProtocol {
         presenter?.changeRadius(with: sender.value)
     }
     
-    
+    @objc func tapSearchButton(){
+        presenter?.navigateToMapsView(with: self)
+    }
     
     let searchButton : UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 200))

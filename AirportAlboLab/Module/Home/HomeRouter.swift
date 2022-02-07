@@ -16,7 +16,7 @@ protocol HomeRouterProtocol {
     
     static func createModule() -> HomeRouterProtocol
     
-    func navigateToMapsView(with viewController : UIViewController)
+    func navigateToMapsView(with viewController : UIViewController, radiusValue : Float)
 }
 
 class HomeRouter : HomeRouterProtocol {
@@ -41,8 +41,8 @@ class HomeRouter : HomeRouterProtocol {
         return router
     }
     
-    func navigateToMapsView(with viewController : UIViewController){
-        let contentView = UIHostingController(rootView: ContentMapsView())
+    func navigateToMapsView(with viewController : UIViewController, radiusValue : Float){
+        let contentView = MapRouter.createModule(with: Int(radiusValue))
         viewController.navigationController?.pushViewController(contentView, animated: true)
     }
     
