@@ -10,7 +10,6 @@ import Combine
 
 
 protocol MapExternalDataProtocol {
-    var airpotsPublisher : Published<[Airport]>.Publisher{ get }
     var ouput : MapExternalDataProtocolOuput? {get set}
     
     func updateAirports(with location : LocationAndRadius)
@@ -22,13 +21,8 @@ protocol MapExternalDataProtocolOuput {
 
 class MapExternalData : MapExternalDataProtocol  {
     
-    @Published var airports : [Airport] = []
-    
     var ouput : MapExternalDataProtocolOuput?
     
-    var airpotsPublisher: Published<[Airport]>.Publisher {
-        $airports
-    }
     
     func updateAirports(with location : LocationAndRadius) {
         let headers = [
@@ -52,11 +46,10 @@ class MapExternalData : MapExternalDataProtocol  {
             if respuesta.statusCode == 200 {
                 do{
                     if let datastr = String(data: data!, encoding: String.Encoding.utf8){
-                                  print("la respuesta en data es: \(datastr)")
-                        }
+                        print("la respuesta en data es: \(datastr)")
+                    }
                     let decoder = JSONDecoder()
                     let arrayAirpot = try decoder.decode(Airports.self, from: dato)
-                    self.airports = arrayAirpot.items
                     self.ouput?.didLoadOirports(airports: arrayAirpot)
                 }catch let errorJson {
                     print("error json \(errorJson)")
@@ -68,9 +61,11 @@ class MapExternalData : MapExternalDataProtocol  {
     }
     
     private func getUrl(_ location : LocationAndRadius) -> URL? {
-        let str = "https://aerodatabox.p.rapidapi.com/airports/search/location/51.511142/-0.103869/km/100/16?withFlightInfoOnly=true"
-        let url = URL(string: str)
-        return url
+        let strLat = String(location.location.lat)
+        let strLon = String(location.location.lon)
+        let strRadius = String(location.radius)
+        let strUrl = "https://aerodatabox.p.rapidapi.com/airports/search/location/\(strLat)/\(strLon)/km/\(strRadius)/16?withFlightInfoOnly=false"
+        return URL(string: strUrl)
     }
     
     

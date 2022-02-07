@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct AirportsListView: View {
+    
+    @ObservedObject var presenter : MapPresenter
+    
     var body: some View {
-        Text("Hello, airpot")
+        List(presenter.airportList){ airpot in
+            Text(airpot.airport.name)
+                .frame(width: 200)
+                .multilineTextAlignment(.leading)
+
+        }
     }
 }
 
-struct AirportsListView_Previews: PreviewProvider {
-    static var previews: some View {
-        AirportsListView()
-    }
-}
+

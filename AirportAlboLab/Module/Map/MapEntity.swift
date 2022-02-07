@@ -21,6 +21,11 @@ struct Airport : Codable {
     var location : Location
 }
 
+struct AirportIdentif : Identifiable {
+    var id = UUID()
+    var airport : Airport
+}
+
 
 struct Location : Codable {
     var lat : Double

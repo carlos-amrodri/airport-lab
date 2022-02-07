@@ -17,7 +17,7 @@ struct ContentMapsView: View {
                 .tabItem {
                 Image(systemName: "map.fill")
             }
-            AirportsListView().tabItem{
+            AirportsListView(presenter: self.presenter).tabItem{
                 Image(systemName: "mappin.circle.fill")
             }
         }

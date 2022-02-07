@@ -73,17 +73,15 @@ struct Maps : UIViewRepresentable {
                }
            }
            
+ 
+           
            func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-               
-               
-
                guard let current = manager.location?.coordinate,
                      let location = locations.last else{
                    return
                }
-               
-               presenter.getAirports(current.longitude, lon: current.longitude)
-               
+               presenter.getAirports(current.latitude, lon: current.longitude)
+
                let geocoder = CLGeocoder()
                geocoder.reverseGeocodeLocation(location) { (place, error) in
                    if error != nil {
@@ -91,11 +89,11 @@ struct Maps : UIViewRepresentable {
                        return
                    }
                    self.conexion.map.removeAnnotations(self.conexion.map.annotations)
-                   self.conexion.map.addAnnotations((self.presenter.airportList))
+                   self.conexion.map.addAnnotations((self.presenter.airportListPoint))
                    let span = MKCoordinateSpan(latitudeDelta: 8.0, longitudeDelta: 8.0)
                    let region = MKCoordinateRegion(center: location.coordinate, span: span)
                    self.conexion.map.region = region
-                   
+
                }
                
            }

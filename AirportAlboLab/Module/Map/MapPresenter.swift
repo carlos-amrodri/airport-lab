@@ -18,7 +18,8 @@ class MapPresenter : ObservableObject {
     
     var radius : Int
     
-    @Published var airportList: [MKPointAnnotation] = []
+    @Published var airportListPoint: [MKPointAnnotation] = []
+    @Published var airportList: [AirportIdentif] = []
 
     
     init(radius : Int, interactor : MapInteractor){
@@ -37,11 +38,16 @@ class MapPresenter : ObservableObject {
 }
 
 extension MapPresenter : MapInteractorOuputProtocol{
-    func didLoadPointAnnotation(points: [MKPointAnnotation]) {
+    
+    func didLoadPointAnnotation(points: [MKPointAnnotation], airports: [Airport]) {
         DispatchQueue.main.async {
-            self.airportList = points
+            self.airportListPoint = points
+            self.airportList = airports.map({ airport in
+                return AirportIdentif(airport: airport)
+            })
         }
     }
+    
     
     
 }

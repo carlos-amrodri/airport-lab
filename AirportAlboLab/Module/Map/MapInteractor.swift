@@ -10,7 +10,7 @@ import Combine
 import MapKit
 
 protocol MapInteractorOuputProtocol {
-    func didLoadPointAnnotation(points : [MKPointAnnotation])
+    func didLoadPointAnnotation(points : [MKPointAnnotation], airports : [Airport])
 }
 
 
@@ -41,7 +41,7 @@ extension MapInteractor : MapExternalDataProtocolOuput  {
             point.title = port.name
             arrayPoint.append(point)
         }
-        self.ouput?.didLoadPointAnnotation(points: arrayPoint)
+        self.ouput?.didLoadPointAnnotation(points: arrayPoint, airports: airports.items)
     }
     
     
